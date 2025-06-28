@@ -1,8 +1,9 @@
-# 👗 Hybrid Fashion Trend Matching API — Style Studio (Game Zone)
+# 👗 Hybrid Fashion Trend Matching Model — Style Studio (Game Zone)
 
-This Flask-based **AI scoring microservice** powers real-time fashion trend analysis in **Style Studio’s Game Zone**. It compares user-submitted outfit images with **live fashion trends**, using a **hybrid of FashionBERT + CLIP**, and generates a **trend alignment score** for leaderboard ranking and winner selection.
+This  is updated Flask-based **AI scoring microservice** powers real-time fashion trend analysis in **Style Studio’s Game Zone**. It compares user-submitted outfit images with **live fashion trends**, using a **hybrid of FashionBERT + CLIP**, and generates a **trend alignment score** for leaderboard ranking and winner selection.
 
 ---
+Style Studio Repo-https://github.com/Ananyasolanki123/StyleStudio
 
 ## 🎯 Purpose
 
