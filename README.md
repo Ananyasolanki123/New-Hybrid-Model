@@ -1,70 +1,34 @@
-🧥 Hybrid Fashion Trend Matcher — Style Studio: Game Zone 🎮
-A Flask-based AI app that compares a user's fashion design to real-time trending fashion styles using a hybrid of:
+# 👗 Hybrid Fashion Trend Matching API — Style Studio (Game Zone)
 
-🤖 CLIP-based vision-language matching
+This Flask-based **AI scoring microservice** powers real-time fashion trend analysis in **Style Studio’s Game Zone**. It compares user-submitted outfit images with **live fashion trends**, using a **hybrid of FashionBERT + CLIP**, and generates a **trend alignment score** for leaderboard ranking and winner selection.
 
-🎨 Color palette coherence analysis
+---
 
-📈 Live trend data from Google Trends
+## 🎯 Purpose
 
-🔍 Dynamic image search (DuckDuckGo or Google CSE)
+This API is used as the **core scoring backend** in the **Design Analysis system** for Style Studio. It determines how well a user’s outfit matches current fashion trends, with scores feeding directly into the Game Zone **ranking and competition winner logic**.
 
-This powers the Game Zone feature in Style Studio, where users test how well their outfit matches live fashion trends.
+---
 
-🚀 Features
-✅ Upload an outfit image and get a score on how trendy it is.
+## 🧠 Scoring Methodology
 
-✅ Uses CLIP model (fashion-clip) to compare image with trending styles.
+1. 🔤 **FashionBERT** encodes trend text embeddings based on fashion-specific vocabulary.
+2. 🧠 **CLIP** evaluates the semantic alignment between the outfit image and trending text prompts.
+3. 🎨 **KMeans clustering** extracts dominant colors from the image and compares them with colors from trending looks.
+4. 📊 A weighted score is generated, combining:
+   {
+  "color_coherence_score",
+  "final_weighted_score",
+  "trend_match_score",
+  "vibe_score",
+  "vibe_trend"
+}
 
-✅ Extracts dominant color palette and compares with real-trend palettes.
+---
 
-✅ Trends are fetched dynamically via Google Trends.
+## 🧪 Example Response
 
-✅ Trend images are fetched from DuckDuckGo or Google CSE.
-
-✅ Outputs a final trend match score with detailed breakdown.
-
-🧠 Model Architecture
-Component	Purpose
-fashion-clip	Vision-language model for vibe similarity
-KMeans	Color palette extraction
-pytrends	Gets trending fashion phrases
-requests	Downloads real images from search results
-
-📂 Project Structure
-php
-Copy
-Edit
-/Hybrid Model/
-│
-├── model.py                 # Main Flask app
-├── static/
-│   └── default_dress.jpg    # Fallback image if search fails
-├── templates/
-│   └── form.html            # Simple UI to upload image
-├── requirements.txt
-└── README.md
-💡 How It Works
-User uploads an outfit image
-
-App:
-
-Fetches top 5 trending fashion terms from Google Trends
-
-Fetches real images of those trends
-
-Extracts color palettes from the trend image + user's image
-
-Compares semantic similarity via CLIP
-
-Scores color coherence
-
-Returns a combined trend match score out of 100.
-
-🖼️ Example Output (JSON)
 json
-Copy
-Edit
 {
   "color_coherence_score": 56.15,
   "final_weighted_score": 39.44,
@@ -72,53 +36,55 @@ Edit
   "vibe_score": 0.23,
   "vibe_trend": "isPartial"
 }
-🛠️ Setup Instructions
-Clone the project:
 
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/style-studio-hybrid.git
-cd style-studio-hybrid
-Create a virtual environment (optional):
+🛠️ API Endpoint
+POST /trend-match
+Upload a fashion outfit image and get a trend score.
 
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-Install dependencies:
+🧩 Components
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Component	         |    Description         
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+FashionBERT	Text   |   embedding for trend prompts (HuggingFace)
+Fashion-CLIP	     |   Image-text alignment model (patrickjohncyh)
+KMeans	           |   Color palette clustering
+pytrends	         |   Real-time trend keywords from Google
+requests	         |   Dynamic image fetching from trend keywords
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
-Run the app:
+📦 Project Structure 
+Hybrid Model/
+├── model.py                  # Main Flask app and scoring logic
+├── static/default_dress.jpg # Fallback trend image
+├── templates/form.html      # Optional web UI
+├── README.md
 
-bash
-Copy
-Edit
+🏆 Game Zone Integration
+
+| Step | Role of Model                                      |
+| ---- | -------------------------------------------------- |
+| 1.   | Users submit outfit designs                        |
+| 2.   | Model analyzes similarity with trending fashion    |
+| 3.   | Color and semantic scores are calculated           |
+| 4.   | Final scores are fed into Game Zone leaderboard    |
+| 5.   | **Top scorers are declared winners** automatically |
+
+⚙️ Setup Instructions
+1.Run the API:
 python model.py
-Open in browser:
+
+2.Open in browser:
 http://localhost:5000
 
-🧪 Requirements
-Python 3.10 or 3.11 (3.12 works with direct API requests)
-
-transformers, torch, pytrends, flask, scikit-learn, Pillow, requests
-
 🔒 Notes
-Make sure static/default_dress.jpg exists to avoid fallback errors.
+Ensure pytrends is limited to 5 keywords per call.
 
-You can toggle between DuckDuckGo image fetching or Google CSE depending on API limits.
+Trend image fetching uses DuckDuckGo or Google CSE (with fallback).
 
-📦 Use Case: Style Studio – Game Zone 🎮
-This model powers a fun feature in Style Studio, where users upload their designs and see how "on-trend" they are based on real-time fashion analysis. Scores, recommendations, and badges make it a gamified and engaging user experience.
+Add static/default_dress.jpg for robustness.
 
-📬 Credits
-Model: patrickjohncyh/fashion-clip
+🤖 Model Links
+FashionBERT (Hugging Face)
 
-Trend API: pytrends
+FashionCLIP (Hugging Face)
 
-Color logic inspired by Google Material Design palette extraction
 
