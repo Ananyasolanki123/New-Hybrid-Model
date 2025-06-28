@@ -1,0 +1,2 @@
+pip install pytrends
+pip install flask transformers torch torchvision pytrends scikit-learn google-api-python-client pillow requests
