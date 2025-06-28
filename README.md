@@ -47,10 +47,10 @@ Upload a fashion outfit image and get a trend score.
 Component	         |    Description         
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 FashionBERT	Text   |   embedding for trend prompts (HuggingFace)
-Fashion-CLIP	     |   Image-text alignment model (patrickjohncyh)
-KMeans	           |   Color palette clustering
-pytrends	         |   Real-time trend keywords from Google
-requests	         |   Dynamic image fetching from trend keywords
+Fashion-CLIP	    |   Image-text alignment model (patrickjohncyh)
+KMeans	          |   Color palette clustering
+pytrends	          |   Real-time trend keywords from Google
+requests	          |   Dynamic image fetching from trend keywords
 
 📦 Project Structure 
 Hybrid Model/
